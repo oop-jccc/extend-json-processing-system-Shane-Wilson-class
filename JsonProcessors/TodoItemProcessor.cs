@@ -8,7 +8,8 @@ public class TodoItemProcessor : IJsonProcessor
 {
     public bool CanProcess(JObject json)
     {
-        return json.ContainsKey("Title") && json.ContainsKey("IsCompleted");
+        return json.ContainsKey(nameof(TodoItem.Title)) &&
+               json.ContainsKey(nameof(TodoItem.IsCompleted));
     }
 
     public object? Process(JObject json)
@@ -16,10 +17,9 @@ public class TodoItemProcessor : IJsonProcessor
         if (!CanProcess(json)) return null;
 
         var todoItem = json.ToObject<TodoItem>();
-        if (todoItem is null) return null;
-
-        // Create a safe, non-destructive copy with IsCompleted set to true
-        var completedTodo = todoItem with { IsCompleted = true };
-        return completedTodo;
+        return todoItem! with
+        {
+            IsCompleted = true
+        };
     }
 }
