@@ -16,7 +16,7 @@ public static class Program
 
         builder.Services.AddSingleton<IJsonProcessor, UserJsonProcessor>();
         builder.Services.AddSingleton<IJsonProcessor, ProductJsonProcessor>();
-       // TODO: builder.Services.AddSingleton<IJsonProcessor, TodoItemProcessor>();
+        builder.Services.AddSingleton<IJsonProcessor, TodoItemProcessor>();
 
         var app = builder.Build();
 
